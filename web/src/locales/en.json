@@ -1,0 +1,12 @@
+{
+  "title": "HemoSight — Blood Smear Screening Aid",
+  "disclaimer": "SCREENING AID ONLY — NOT A DIAGNOSTIC DEVICE. Confirm every result with a qualified clinician.",
+  "wbc_differential": "WBC Differential",
+  "malaria_flag": "Malaria abnormality flag",
+  "confidence": "Calibrated confidence",
+  "uncertainty": "Uncertainty",
+  "needs_review": "NEEDS REVIEW",
+  "capture": "Capture smear",
+  "raw": "Raw", "detections": "Detections", "heatmap": "Heatmap",
+  "play_voice": "Play findings"
+}

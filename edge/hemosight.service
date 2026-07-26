@@ -1,0 +1,18 @@
+[Unit]
+Description=HemoSight Edge Screening Service (M Sujith Sali, ISE VTU)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=hemosight
+WorkingDirectory=/opt/hemosight
+Environment=PYTHONHASHSEED=1729
+Environment=HEMOSIGHT_CAMERA=uvc
+ExecStart=/opt/hemosight/.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=5
+# Screening aid only — not a diagnostic device.
+
+[Install]
+WantedBy=multi-user.target

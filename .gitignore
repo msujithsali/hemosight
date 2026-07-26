@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.db
+mlflow.db
+results/*.pt
+results/*.onnx
+keys/*.pem
+data/raabin/ data/malaria/ data/bccd/
+node_modules/
+.venv/

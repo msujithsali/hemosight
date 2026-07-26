@@ -1,0 +1,55 @@
+[project]
+name = "hemosight"
+version = "0.1.0"
+description = "Federated Edge-AI for Peripheral Blood Smear Screening in Rural PHCs (screening aid, not a diagnostic device)"
+authors = [{ name = "M Sujith Sali", email = "sujith.sali@vtu.example" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.6",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "python-jose[cryptography]>=3.3",
+    "argon2-cffi>=23.1",
+    "cryptography>=42.0",
+    "numpy>=1.26",
+    "opencv-python-headless>=4.9",
+    "scikit-image>=0.22",
+    "scikit-learn>=1.4",
+    "albumentations>=1.4",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "timm>=0.9",
+    "ultralytics>=8.2",
+    "mlflow>=2.12",
+    "onnx>=1.16",
+    "onnxruntime>=1.17",
+    "grad-cam>=1.5",
+    "flwr>=1.8",
+    "weasyprint>=61.0",
+    "sounddevice>=0.4",
+]
+
+[project.optional-dependencies]
+dp = ["opacus>=1.4"]
+edge = ["picamera2; platform_machine=='aarch64'"]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.4", "mypy>=1.10", "pre-commit>=3.7"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["ml", "api"]
