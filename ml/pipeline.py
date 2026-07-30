@@ -21,7 +21,8 @@ from api.schemas import (AnalysisResponse, AttentionGate, AttentionStatus,
                          Detection, Metrics, Provenance)
 from common.disclaimer import DISCLAIMER
 from ml.attention_gate import cell_mask_from_bboxes, evaluate_gate
-from ml.detect_cv import detect_cells
+# Prefer real YOLOv8 detector, fallback to classical CV
+from ml.detect_yolo import detect_cells_yolo as detect_cells
 from ml.models import WBC_CLASSES
 from ml.net import build_tiny
 from ml.net_gradcam import gradcam_tiny
