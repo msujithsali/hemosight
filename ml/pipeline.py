@@ -34,15 +34,31 @@ NEEDS_REVIEW_UNCERTAINTY = 0.15
 PARASITE_CONF_THRESHOLD = 0.90
 
 
+def _build_resnet18_malaria():
+    import torchvision.models as models
+    m = models.resnet18(weights=None)
+    m.fc = torch.nn.Linear(m.fc.in_features, len(MALARIA_CLASSES))
+    return m
+
+
 def load_models(weights_dir: Path = Path("results")):
     wbc = build_tiny(len(WBC_CLASSES))
-    mal = build_tiny(len(MALARIA_CLASSES))
-    wp, mp = weights_dir / "wbc_tiny.pt", weights_dir / "malaria_tiny.pt"
+    wp = weights_dir / "wbc_tiny.pt"
     if wp.exists():
         wbc.load_state_dict(torch.load(wp, map_location="cpu"))
-    if mp.exists():
-        mal.load_state_dict(torch.load(mp, map_location="cpu"))
-    wbc.eval(); mal.eval()
+    wbc.eval()
+    real_mp = weights_dir / "malaria_resnet18_REAL.pt"
+    tiny_mp = weights_dir / "malaria_tiny.pt"
+    if real_mp.exists():
+        mal = _build_resnet18_malaria()
+        mal.load_state_dict(torch.load(real_mp, map_location="cpu"))
+        print(f"[HemoSight] Loaded REAL malaria model: {real_mp}")
+    else:
+        mal = build_tiny(len(MALARIA_CLASSES))
+        if tiny_mp.exists():
+            mal.load_state_dict(torch.load(tiny_mp, map_location="cpu"))
+        print(f"[HemoSight] Loaded toy malaria model")
+    mal.eval()
     return wbc, mal
 
 
