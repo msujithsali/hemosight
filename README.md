@@ -107,7 +107,7 @@ Upload a blood smear image → get cell counts, WBC differential, malaria flag, 
 
 ## Honest Limitations
 
-- **Cell detection** uses classical CV (contour-based), not a trained object detector — works on clean slides, struggles with overlapping cells or artifacts.
+- **Cell detection** uses YOLOv8s trained on BCCD (mAP50 90.84%, mAP50-95 65.51%). Classical CV remains as fallback for offline mode.
 - **Federated training** runs on a single machine simulating multiple clients — not tested on actual distributed Raspberry Pi hardware.
 - **Not clinically validated.** This is a screening aid prototype, not a medical device. No regulatory approval.
 - **ResNet-18 metrics above** are for binary malaria classification only — WBC differential uses a separate model path.
