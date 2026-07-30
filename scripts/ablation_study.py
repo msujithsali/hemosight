@@ -38,9 +38,9 @@ def run_ablation():
         def __init__(s, l): super().__init__(); s.l = l
         def forward(s, x): return s.l
 
-    dummy_loader = [(torch.randn(n, 3, 4, 4), torch.tensor(labels))]
+    dummy_loader = [(torch.randn(n, 3, 4, 4), torch.tensor(labels, dtype=torch.long))]
     scaler = TemperatureScaler.fit(Fixed(logits), dummy_loader, device="cpu")
-    probs_cal = F.softmax(scaler(logits), dim=-1).numpy()
+    probs_cal = F.softmax(scaler(logits).detach(), dim=-1).numpy()
     ece_cal = expected_calibration_error(probs_cal, labels)
     brier_cal = brier_score(probs_cal, labels)
 

@@ -1,0 +1,15 @@
+{
+  "ablation": "temperature_scaling",
+  "n_samples": 200,
+  "before": {
+    "ECE": 0.3158,
+    "Brier": 0.6474,
+    "T": 1.0
+  },
+  "after": {
+    "ECE": 0.2239,
+    "Brier": 0.5481,
+    "T": 2.438
+  },
+  "ece_reduction": 0.092
+}
