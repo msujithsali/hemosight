@@ -1,0 +1,121 @@
+{
+  "analysis_id": "44604855-175e-4e0e-89e3-658b8124d96d",
+  "provenance": "BOOTSTRAP",
+  "model_version": "tiny-synthetic-v1",
+  "mlflow_run_id": "local-functional",
+  "metrics": {
+    "total_counts": 8,
+    "wbc_differential": {
+      "Neutrophil": 8,
+      "Eosinophil": 0,
+      "Basophil": 0,
+      "Lymphocyte": 0,
+      "Monocyte": 0
+    },
+    "parasite_flag": true,
+    "parasitemia_estimate_pct": 62.5
+  },
+  "detections": [
+    {
+      "id": 0,
+      "class_name": "Neutrophil",
+      "bbox": [
+        129,
+        175,
+        174,
+        217
+      ],
+      "confidence": 0.3309,
+      "uncertainty_std": 0.0232
+    },
+    {
+      "id": 1,
+      "class_name": "Neutrophil",
+      "bbox": [
+        178,
+        238,
+        227,
+        285
+      ],
+      "confidence": 0.2803,
+      "uncertainty_std": 0.0084
+    },
+    {
+      "id": 2,
+      "class_name": "Neutrophil",
+      "bbox": [
+        38,
+        155,
+        86,
+        199
+      ],
+      "confidence": 0.2737,
+      "uncertainty_std": 0.0138
+    },
+    {
+      "id": 3,
+      "class_name": "Neutrophil",
+      "bbox": [
+        203,
+        90,
+        250,
+        135
+      ],
+      "confidence": 0.3167,
+      "uncertainty_std": 0.0139
+    },
+    {
+      "id": 4,
+      "class_name": "Neutrophil",
+      "bbox": [
+        51,
+        41,
+        99,
+        84
+      ],
+      "confidence": 0.3881,
+      "uncertainty_std": 0.0195
+    },
+    {
+      "id": 5,
+      "class_name": "Neutrophil",
+      "bbox": [
+        33,
+        206,
+        78,
+        246
+      ],
+      "confidence": 0.2814,
+      "uncertainty_std": 0.0114
+    },
+    {
+      "id": 6,
+      "class_name": "Neutrophil",
+      "bbox": [
+        198,
+        16,
+        241,
+        57
+      ],
+      "confidence": 0.2867,
+      "uncertainty_std": 0.0169
+    },
+    {
+      "id": 7,
+      "class_name": "Neutrophil",
+      "bbox": [
+        134,
+        60,
+        176,
+        100
+      ],
+      "confidence": 0.3026,
+      "uncertainty_std": 0.0103
+    }
+  ],
+  "attention_gate": {
+    "iou_score": 0.0,
+    "status": "ATTENTION_MISALIGNMENT"
+  },
+  "disclaimer": "SCREENING AID ONLY — NOT A DIAGNOSTIC DEVICE. HemoSight produces abnormality flags with calibrated confidence and a needs-review flag. It does not diagnose disease. Every result must be confirmed by a qualified pathologist or physician. Results on public benchmarks (Raabin-WBC, NIH Malaria) are off-domain from Indian PHC settings and require TARGET-tagged clinical validation before any real-world use."
+}
