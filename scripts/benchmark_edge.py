@@ -47,10 +47,10 @@ def run():
     q_ms = bench(q, x)
 
     # Sizes
-    torch.save(fp32.state_dict(), "/tmp/fp32.pt")
-    torch.save(q.state_dict(), "/tmp/q.pt")
-    fp32_kb = Path("/tmp/fp32.pt").stat().st_size / 1024
-    q_kb = Path("/tmp/q.pt").stat().st_size / 1024
+    torch.save(fp32.state_dict(), "results/_tmp_fp32.pt")
+    torch.save(q.state_dict(), "results/_tmp_q.pt")
+    fp32_kb = Path("results/_tmp_fp32.pt").stat().st_size / 1024
+    q_kb = Path("results/_tmp_q.pt").stat().st_size / 1024
 
     result = {
         "model": "ResNet-18 malaria",
@@ -67,12 +67,4 @@ def run():
 
 
 if __name__ == "__main__":
-    # Windows tmp path fix
-    import os
-    if os.name == "nt":
-        os.makedirs("results/tmp", exist_ok=True)
-        # Patch tmp paths
-        import scripts.benchmark_edge as this
-        _bench = run
-        # Simple in-place
     run()

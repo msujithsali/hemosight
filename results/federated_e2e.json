@@ -1,0 +1,20 @@
+{
+  "strategy": "FedAvg",
+  "n_clients": 3,
+  "n_rounds": 3,
+  "per_round": [
+    {
+      "round": 1,
+      "mean_accuracy": 0.5938
+    },
+    {
+      "round": 2,
+      "mean_accuracy": 0.5938
+    },
+    {
+      "round": 3,
+      "mean_accuracy": 0.6042
+    }
+  ],
+  "sharding": "non-IID class-imbalanced (seed-based)"
+}
