@@ -1,0 +1,42 @@
+{
+  "environment": {
+    "python": "3.14.3",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "models": {
+    "malaria_resnet18_REAL.pt": {
+      "sha256": "fd1354a2f9005e28bef5615336d11bd42176d0427d682ff9deda94aa053638b8",
+      "size_mb": 42.72
+    },
+    "wbc_efficientnet_b0_REAL.pt": {
+      "sha256": "adc8e5bb313f5ce12afec3fce7a2016591a47cb4bcf707008f1a70c6e8f3f73a",
+      "size_mb": 15.6
+    },
+    "bccd_yolov8s_REAL.pt": {
+      "sha256": "f15a324a4aba24915880587389e4599f1bd71443a7f0328fab567594b49b6708",
+      "size_mb": 21.33
+    }
+  },
+  "datasets_used": [
+    {
+      "name": "NIH Malaria Cell Images",
+      "n": 27558,
+      "url": "https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria",
+      "citation": "Rajaraman et al., PeerJ 2018 (6:e4568)"
+    },
+    {
+      "name": "Kaggle WBC 5-class",
+      "n": 4339,
+      "url": "https://www.kaggle.com/datasets/masoudnickparvar/white-blood-cells-dataset",
+      "citation": "Public Kaggle dataset"
+    },
+    {
+      "name": "BCCD",
+      "n": 273,
+      "url": "https://www.kaggle.com/datasets/reighns/bccd-object-detection",
+      "citation": "cosmicad/akshaylambda BCCD"
+    }
+  ],
+  "seed": 42,
+  "training_platform": "Kaggle GPU T4 / P100"
+}
