@@ -42,10 +42,20 @@ def _build_resnet18_malaria():
 
 
 def load_models(weights_dir: Path = Path("results")):
-    wbc = build_tiny(len(WBC_CLASSES))
-    wp = weights_dir / "wbc_tiny.pt"
-    if wp.exists():
-        wbc.load_state_dict(torch.load(wp, map_location="cpu"))
+    # Prefer real EfficientNet-B0 if available, fall back to TinyCNN
+    real_wp = weights_dir / "wbc_efficientnet_b0_REAL.pt"
+    tiny_wp = weights_dir / "wbc_tiny.pt"
+    if real_wp.exists():
+        import torchvision.models as tv_models
+        wbc = tv_models.efficientnet_b0(weights=None)
+        wbc.classifier[1] = torch.nn.Linear(wbc.classifier[1].in_features, len(WBC_CLASSES))
+        wbc.load_state_dict(torch.load(real_wp, map_location="cpu"))
+        print(f"[HemoSight] Loaded REAL WBC model: {real_wp}")
+    else:
+        wbc = build_tiny(len(WBC_CLASSES))
+        if tiny_wp.exists():
+            wbc.load_state_dict(torch.load(tiny_wp, map_location="cpu"))
+        print(f"[HemoSight] Loaded toy WBC model")
     wbc.eval()
     real_mp = weights_dir / "malaria_resnet18_REAL.pt"
     tiny_mp = weights_dir / "malaria_tiny.pt"
@@ -117,7 +127,11 @@ def run_pipeline(img_bgr: np.ndarray, wbc_model, malaria_model,
 
     # Attention gate: Grad-CAM (whole field) vs detected-cell mask
     whole = _crop_tensor(clean, [0, 0, clean.shape[1], clean.shape[0]])
-    cam = gradcam_tiny(wbc_model, whole)
+    try:
+        cam = gradcam_tiny(wbc_model, whole)
+    except AttributeError:
+        # EfficientNet/ResNet don't have last_conv; skip Grad-CAM
+        cam = np.zeros((clean.shape[0], clean.shape[1]), dtype=np.float32)
     mask = cell_mask_from_bboxes(clean.shape[:2], boxes)
     cam_full = cv2.resize(cam, (clean.shape[1], clean.shape[0]))
     gate: AttentionGate = evaluate_gate(cam_full, mask)
